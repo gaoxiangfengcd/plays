@@ -1,0 +1,16 @@
+{
+  "name": "Play Picks - Random Tools and Mini Games",
+  "short_name": "Play Picks",
+  "description": "Free random picker tools, spin wheels, dice, coin flips, and party mini games.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f1120",
+  "theme_color": "#0f1120",
+  "lang": "en",
+  "categories": ["games", "entertainment", "utilities"],
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

@@ -1,0 +1,4 @@
+.DS_Store
+.joycode/
+node_modules/
+*.log
