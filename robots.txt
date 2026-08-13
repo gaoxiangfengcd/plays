@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://play.jiandengcun.com/sitemap.xml
+Sitemap: https://plays.jiandengcun.com/sitemap.xml
