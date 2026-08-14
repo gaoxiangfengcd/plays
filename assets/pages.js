@@ -9,6 +9,7 @@ const toolCards = [
   ["Truth or Dare", "/games/truth-or-dare/", "Party", "⭐ 4.8", "19.5k plays"],
   ["Would You Rather", "/games/would-you-rather/", "Social", "⭐ 4.6", "8.8k plays"],
   ["Memory Match", "/games/memory-match/", "Puzzle", "⭐ 4.9", "16.1k plays"],
+  ["Carpet Cleaning", "/games/carpet-cleaning/", "Satisfying", "⭐ 4.9", "New"],
 ];
 
 function renderToolCards() {
@@ -18,7 +19,7 @@ function renderToolCards() {
     .map(
       ([title, href, category, rating, plays], index) => `
         <a class="card" href="${href}">
-          <span class="card-icon">${["🎡", "🎯", "🎁", "🃏", "🪙", "🎲", "✨", "🎉", "⚡", "🧠"][index]}</span>
+          <span class="card-icon">${["🎡", "🎯", "🎁", "🃏", "🪙", "🎲", "✨", "🎉", "⚡", "🧠", "🧼"][index]}</span>
           <span class="card-info">
             <h3>${title}</h3>
             <small>${category}</small>
