@@ -70,7 +70,7 @@ function cover(file, alt) {
 
 // [title, href, iconKey, minutes, players]
 const quickGames = [
-  ["Coin Flip", "/tools/flip-a-coin/", "coin", "1 min", "12.5K"],
+  ["3D Coin Flip", "/tools/flip-a-coin/", "coin", "1 min", "12.5K"],
   ["Spin the Wheel", "/tools/spin-the-wheel/", "wheel", "2 min", "11.0K"],
   ["Pick a Card", "/tools/pick-a-card/", "card", "1 min", "9.3K"],
   ["Dice Roller", "/tools/dice-roller/", "dice", "1 min", "8.7K"],

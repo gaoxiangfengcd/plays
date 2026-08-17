@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Carpet Cleaning Game - Relaxing Dirty Carpet Cleaner</title>
+    <meta
+      name="description"
+      content="Play Carpet Cleaning, a relaxing browser mini game. Spray soap, rinse with water, scrub stains, and turn a dirty carpet perfectly clean."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://plays.jiandengcun.com/games/carpet-cleaning/" />
+    <meta name="theme-color" content="#0f1120" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Play Picks" />
+    <meta property="og:title" content="Carpet Cleaning Game - Relaxing Dirty Carpet Cleaner" />
+    <meta property="og:description" content="Clean a dirty carpet with soap, water, and brush tools in a satisfying browser game." />
+    <meta property="og:url" content="https://plays.jiandengcun.com/games/carpet-cleaning/" />
+    <meta property="og:image" content="https://plays.jiandengcun.com/favicon.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Carpet Cleaning Game - Relaxing Dirty Carpet Cleaner" />
+    <meta name="twitter:description" content="Spray, scrub, rinse, and watch the dirt disappear." />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Carpet Cleaning Game",
+        "url": "https://plays.jiandengcun.com/games/carpet-cleaning/",
+        "description": "A relaxing browser mini game where players clean a dirty carpet with soap, water, and brush tools.",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body data-tool="carpet-cleaning" class="carpet-body">
+    <header class="site-header carpet-site-nav">
+      <nav class="nav">
+        <a class="logo" href="/"><span class="logo-mark">P</span><span>Play Picks</span></a>
+        <div class="nav-links">
+          <a href="/">All Games</a>
+          <a href="/games/memory-match/">Memory</a>
+          <a href="/tools/dice-roller/">Dice</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="carpet-game" data-carpet-game>
+        <div class="carpet-screen active" data-carpet-screen="menu">
+          <div class="carpet-menu">
+            <p class="eyebrow">Relaxing cleaning sim</p>
+            <h1>Carpet Cleaning</h1>
+            <p class="lead">Clean. Relax. Repeat. Turn a dirty rug into a perfect bright carpet.</p>
+            <div class="buttons">
+              <button class="btn primary" data-carpet-nav="levels">Play</button>
+              <button class="btn" data-carpet-nav="levels">Levels</button>
+              <button class="btn" data-carpet-nav="settings">Settings</button>
+            </div>
+          </div>
+          <div class="carpet-studio-preview" aria-hidden="true">
+            <div class="preview-rug"></div>
+            <div class="preview-wand"></div>
+            <div class="preview-suds"></div>
+          </div>
+        </div>
+
+        <div class="carpet-screen" data-carpet-screen="levels">
+          <div class="carpet-screen-head">
+            <div>
+              <p class="eyebrow">Level select</p>
+              <h1>Choose a Carpet</h1>
+            </div>
+            <button class="btn" data-carpet-nav="menu">Back</button>
+          </div>
+          <div class="level-grid">
+            <button class="level-card" data-carpet-level="0">
+              <span>Level 1</span>
+              <strong>Small Bedroom Carpet</strong>
+              <small>Easy · Reward $50</small>
+            </button>
+            <button class="level-card locked" type="button">
+              <span>Level 2</span>
+              <strong>Family Room Carpet</strong>
+              <small>Medium · Reward $100 · Locked</small>
+            </button>
+            <button class="level-card locked" type="button">
+              <span>Level 3</span>
+              <strong>Very Dirty Carpet</strong>
+              <small>Hard · Reward $200 · Locked</small>
+            </button>
+          </div>
+        </div>
+
+        <div class="carpet-screen carpet-play-screen" data-carpet-screen="play">
+          <div class="carpet-topbar">
+            <a class="home-square" href="/" aria-label="Back home">⌂</a>
+            <div class="level-display"><strong>LEVEL <span data-carpet-level-number>1</span></strong><span data-carpet-level-title>Bedroom Carpet</span></div>
+            <div class="top-clean-meter">
+              <strong>CLEAN <span data-carpet-progress>0%</span></strong>
+              <div class="clean-bar"><span data-carpet-bar></span></div>
+            </div>
+            <div class="coin-display" data-carpet-coins>$250</div>
+            <div class="star-display" data-carpet-live-stars>★★★☆☆</div>
+            <div class="timer-display">◷ <span data-carpet-timer>00:00</span></div>
+            <button class="icon-btn gear-btn" data-carpet-pause type="button" aria-label="Pause">⚙</button>
+          </div>
+
+          <div class="carpet-workshop">
+            <aside class="clean-tools-panel">
+              <h3>Tools</h3>
+              <button class="tool-choice active" data-carpet-tool="water"><span>▰</span>Water <kbd>2</kbd></button>
+              <button class="tool-choice" data-carpet-tool="soap"><span>▣</span>Soap <kbd>1</kbd></button>
+              <button class="tool-choice" data-carpet-tool="brush"><span>▥</span>Brush <kbd>3</kbd></button>
+              <div class="nozzle-panel">
+                <h3>Change Nozzle</h3>
+                <div class="nozzle-grid">
+                  <button class="active" type="button">Wide</button>
+                  <button type="button">Medium</button>
+                  <button type="button">Narrow</button>
+                </div>
+              </div>
+            </aside>
+
+            <div class="carpet-board">
+              <div class="carpet-perspective">
+                <canvas class="carpet-canvas" data-carpet-canvas width="920" height="560"></canvas>
+                <div class="clean-shine" data-carpet-shine></div>
+              </div>
+              <div class="spray-gun" aria-hidden="true"><span></span></div>
+              <div class="tool-cursor" data-carpet-cursor>WATER</div>
+            </div>
+
+            <aside class="objective-stack">
+              <section class="objective-card">
+                <h3>Objectives</h3>
+                <p class="done" data-objective-start>Clean the carpet</p>
+                <p data-objective-stains>Remove all stains</p>
+                <p data-objective-finish>Reach 100% Clean</p>
+              </section>
+              <section class="progress-card">
+                <h3>Progress</h3>
+                <div class="progress-ring" data-carpet-ring style="--clean: 0%">
+                  <strong data-carpet-progress-ring>0%</strong>
+                  <span>Cleaned</span>
+                </div>
+              </section>
+              <section class="tips-card">
+                <h3>Tips</h3>
+                <p>Use <b>SOAP</b> to soften tough stains, then <b>BRUSH</b> and rinse with <b>WATER</b>.</p>
+              </section>
+            </aside>
+          </div>
+
+          <div class="clean-bottom-bar">
+            <div class="control-hints">
+              <span>◖ Hold to spray</span>
+              <span>WASD Move camera</span>
+              <span>R Reset camera</span>
+            </div>
+            <div class="drag-hint">↔ ◖ Hold & move to clean</div>
+            <div class="level-strip">
+              <button class="level-thumb active" type="button"><span>1</span><b>★★★</b></button>
+              <button class="level-thumb locked" type="button"><span>2</span><b>▣</b></button>
+              <button class="level-thumb locked" type="button"><span>3</span><b>▣</b></button>
+              <button class="level-thumb locked" type="button"><span>4</span><b>▣</b></button>
+              <button class="level-thumb locked" type="button"><span>5</span><b>▣</b></button>
+            </div>
+            <button class="next-level-btn" data-carpet-next type="button">Next Level ›</button>
+            <small data-carpet-feedback>Hold left mouse and wash the dirty carpet.</small>
+          </div>
+        </div>
+
+        <div class="carpet-overlay" data-carpet-overlay hidden>
+          <div class="carpet-dialog" data-carpet-dialog="pause">
+            <p class="eyebrow">Paused</p>
+            <h2>Take a breath</h2>
+            <div class="buttons">
+              <button class="btn primary" data-carpet-resume>Resume</button>
+              <button class="btn" data-carpet-restart>Restart</button>
+              <button class="btn" data-carpet-nav="settings">Settings</button>
+              <button class="btn" data-carpet-exit>Exit</button>
+            </div>
+          </div>
+
+          <div class="carpet-dialog" data-carpet-dialog="result" hidden>
+            <p class="eyebrow">Perfect clean</p>
+            <h2>100% Clean</h2>
+            <div class="result-score">
+              <strong data-carpet-stars>★★★★★</strong>
+              <span data-carpet-time>Time 0:00</span>
+              <span>+$50</span>
+            </div>
+            <div class="buttons">
+              <button class="btn primary" data-carpet-restart>Play Again</button>
+              <button class="btn" data-carpet-next>Next Level</button>
+            </div>
+          </div>
+
+          <div class="carpet-dialog" data-carpet-dialog="settings" hidden>
+            <p class="eyebrow">Settings</p>
+            <h2>Game Settings</h2>
+            <label>Master Volume<input data-carpet-volume="master" type="range" min="0" max="100" value="80" /></label>
+            <label>Music<input data-carpet-volume="music" type="range" min="0" max="100" value="35" /></label>
+            <label>SFX<input data-carpet-volume="sfx" type="range" min="0" max="100" value="75" /></label>
+            <label>Graphics<select data-carpet-graphics><option>High</option><option>Medium</option><option>Low</option></select></label>
+            <div class="buttons">
+              <button class="btn primary" data-carpet-settings-back>Back</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="ad-slot">AdSense placeholder - below game</div>
+
+      <section class="content-section">
+        <h2>How to play Carpet Cleaning</h2>
+        <p>
+          Pick a tool, hold the left mouse button over the rug, and drag across the dirty areas. Soap softens dark grease,
+          water rinses broad dirt, and the brush removes stubborn mud faster.
+        </p>
+      </section>
+
+      <section class="content-section faq">
+        <h2>FAQ</h2>
+        <details open>
+          <summary>Is this a real cleaning simulator?</summary>
+          <p>No. It is a relaxing browser mini game focused on satisfying dirty-to-clean feedback, not real fluid physics.</p>
+        </details>
+        <details>
+          <summary>Can I play without installing anything?</summary>
+          <p>Yes. This MVP runs directly in the browser with HTML canvas and local game state.</p>
+        </details>
+      </section>
+    </main>
+
+    <script src="/assets/app.js"></script>
+    <script src="/assets/analytics.js"></script>
+  </body>
+</html>

@@ -36,8 +36,8 @@
     </script>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
-  <body data-tool="carpet-cleaning">
-    <header class="site-header">
+  <body data-tool="carpet-cleaning" class="carpet-body">
+    <header class="site-header carpet-site-nav">
       <nav class="nav">
         <a class="logo" href="/"><span class="logo-mark">P</span><span>Play Picks</span></a>
         <div class="nav-links">
@@ -49,6 +49,48 @@
     </header>
 
     <main class="page">
+      <section class="unity-carpet-landing">
+        <div class="unity-stage-card">
+          <div class="unity-stage-copy">
+            <p class="eyebrow">Unity3D WebGL edition</p>
+            <h1>Carpet Cleaning 3D</h1>
+            <p class="lead">Foam, scrub, rinse and reveal bright carpet patterns across five satisfying cleaning levels.</p>
+            <div class="unity-actions">
+              <button class="btn primary" data-unity-launch type="button">Launch Unity Game</button>
+              <a class="btn" href="#browser-fallback">Play Browser Version</a>
+            </div>
+            <div class="unity-meta">
+              <span>5 levels</span>
+              <span>3 tools</span>
+              <span>Stars & coins</span>
+            </div>
+          </div>
+          <div class="unity-loader-card">
+            <div id="unity-container" class="unity-container">
+              <canvas id="unity-canvas" class="unity-canvas" width="1280" height="720"></canvas>
+              <div class="unity-build-missing" data-unity-missing>
+                <strong>Unity WebGL build is not exported yet.</strong>
+                <span>Open `games/carpet-cleaning/unity-source` in Unity, export WebGL to `unity-build`, then this frame will run the real Unity game.</span>
+              </div>
+            </div>
+            <div class="unity-progress"><span data-unity-progress></span></div>
+          </div>
+        </div>
+
+        <div class="unity-level-road">
+          <article><span>01</span><strong>Cozy Bedroom Rug</strong><small>Light dust, fast reward.</small></article>
+          <article><span>02</span><strong>Family Room Carpet</strong><small>Drink stains and footprints.</small></article>
+          <article><span>03</span><strong>Pet Mess Runner</strong><small>Fur clumps and sticky dirt.</small></article>
+          <article><span>04</span><strong>Luxury Pattern Rug</strong><small>Precision cleaning challenge.</small></article>
+          <article><span>05</span><strong>Disaster Carpet</strong><small>Heavy grime, all tools needed.</small></article>
+        </div>
+      </section>
+
+      <section id="browser-fallback" class="content-section unity-note">
+        <h2>Browser fallback</h2>
+        <p>The Unity source is included with this project. Until the WebGL build is exported, this playable browser version lets visitors test the cleaning loop and level progression.</p>
+      </section>
+
       <section class="carpet-game" data-carpet-game>
         <div class="carpet-screen active" data-carpet-screen="menu">
           <div class="carpet-menu">
@@ -82,47 +124,105 @@
               <strong>Small Bedroom Carpet</strong>
               <small>Easy · Reward $50</small>
             </button>
-            <button class="level-card locked" type="button">
+            <button class="level-card" data-carpet-level="1">
               <span>Level 2</span>
               <strong>Family Room Carpet</strong>
-              <small>Medium · Reward $100 · Locked</small>
+              <small>Medium · Reward $100</small>
             </button>
-            <button class="level-card locked" type="button">
+            <button class="level-card" data-carpet-level="2">
               <span>Level 3</span>
-              <strong>Very Dirty Carpet</strong>
-              <small>Hard · Reward $200 · Locked</small>
+              <strong>Pet Mess Runner</strong>
+              <small>Hard · Reward $160</small>
+            </button>
+            <button class="level-card" data-carpet-level="3">
+              <span>Level 4</span>
+              <strong>Luxury Pattern Rug</strong>
+              <small>Expert · Reward $230</small>
+            </button>
+            <button class="level-card" data-carpet-level="4">
+              <span>Level 5</span>
+              <strong>Disaster Carpet</strong>
+              <small>Boss · Reward $350</small>
             </button>
           </div>
         </div>
 
-        <div class="carpet-screen" data-carpet-screen="play">
-          <div class="carpet-hud">
+        <div class="carpet-screen carpet-play-screen" data-carpet-screen="play">
+          <div class="carpet-topbar">
+            <a class="home-square" href="/" aria-label="Back home">⌂</a>
+            <div class="level-display"><strong>LEVEL <span data-carpet-level-number>1</span></strong><span data-carpet-level-title>Bedroom Carpet</span></div>
+            <div class="top-clean-meter">
+              <strong>CLEAN <span data-carpet-progress>0%</span></strong>
+              <div class="clean-bar"><span data-carpet-bar></span></div>
+            </div>
             <div class="coin-display" data-carpet-coins>$250</div>
-            <div class="level-display" data-carpet-level-title>Level 1</div>
-            <button class="icon-btn" data-carpet-pause type="button" aria-label="Pause">II</button>
+            <div class="star-display" data-carpet-live-stars>★★★☆☆</div>
+            <div class="timer-display">◷ <span data-carpet-timer>00:00</span></div>
+            <button class="icon-btn gear-btn" data-carpet-pause type="button" aria-label="Pause">⚙</button>
           </div>
 
           <div class="carpet-workshop">
+            <aside class="clean-tools-panel">
+              <h3>Tools</h3>
+              <button class="tool-choice active" data-carpet-tool="water"><span>▰</span>Water <kbd>2</kbd></button>
+              <button class="tool-choice" data-carpet-tool="soap"><span>▣</span>Soap <kbd>1</kbd></button>
+              <button class="tool-choice" data-carpet-tool="brush"><span>▥</span>Brush <kbd>3</kbd></button>
+              <div class="nozzle-panel">
+                <h3>Change Nozzle</h3>
+                <div class="nozzle-grid">
+                  <button class="active" type="button">Wide</button>
+                  <button type="button">Medium</button>
+                  <button type="button">Narrow</button>
+                </div>
+              </div>
+            </aside>
+
             <div class="carpet-board">
               <div class="carpet-perspective">
                 <canvas class="carpet-canvas" data-carpet-canvas width="920" height="560"></canvas>
                 <div class="clean-shine" data-carpet-shine></div>
               </div>
+              <div class="spray-gun" aria-hidden="true"><span></span></div>
               <div class="tool-cursor" data-carpet-cursor>WATER</div>
             </div>
+
+            <aside class="objective-stack">
+              <section class="objective-card">
+                <h3>Objectives</h3>
+                <p class="done" data-objective-start>Clean the carpet</p>
+                <p data-objective-stains>Remove all stains</p>
+                <p data-objective-finish>Reach 100% Clean</p>
+              </section>
+              <section class="progress-card">
+                <h3>Progress</h3>
+                <div class="progress-ring" data-carpet-ring style="--clean: 0%">
+                  <strong data-carpet-progress-ring>0%</strong>
+                  <span>Cleaned</span>
+                </div>
+              </section>
+              <section class="tips-card">
+                <h3>Tips</h3>
+                <p>Use <b>SOAP</b> to soften tough stains, then <b>BRUSH</b> and rinse with <b>WATER</b>.</p>
+              </section>
+            </aside>
           </div>
 
-          <div class="clean-panel">
-            <div>
-              <strong>CLEAN <span data-carpet-progress>0%</span></strong>
-              <div class="clean-bar"><span data-carpet-bar></span></div>
-              <small data-carpet-feedback>Hold left mouse and wash the dirty carpet.</small>
+          <div class="clean-bottom-bar">
+            <div class="control-hints">
+              <span>◖ Hold to spray</span>
+              <span>WASD Move camera</span>
+              <span>R Reset camera</span>
             </div>
-            <div class="tool-strip">
-              <button class="tool-choice" data-carpet-tool="soap">Soap <kbd>1</kbd></button>
-              <button class="tool-choice active" data-carpet-tool="water">Water <kbd>2</kbd></button>
-              <button class="tool-choice" data-carpet-tool="brush">Brush <kbd>3</kbd></button>
+            <div class="drag-hint">↔ ◖ Hold & move to clean</div>
+            <div class="level-strip">
+              <button class="level-thumb active" data-carpet-level="0" type="button"><span>1</span><b>★★★</b></button>
+              <button class="level-thumb" data-carpet-level="1" type="button"><span>2</span><b>★★★</b></button>
+              <button class="level-thumb" data-carpet-level="2" type="button"><span>3</span><b>★★★</b></button>
+              <button class="level-thumb" data-carpet-level="3" type="button"><span>4</span><b>★★★</b></button>
+              <button class="level-thumb" data-carpet-level="4" type="button"><span>5</span><b>★★★</b></button>
             </div>
+            <button class="next-level-btn" data-carpet-next type="button">Next Level ›</button>
+            <small data-carpet-feedback>Hold left mouse and wash the dirty carpet.</small>
           </div>
         </div>
 
@@ -180,15 +280,51 @@
         <h2>FAQ</h2>
         <details open>
           <summary>Is this a real cleaning simulator?</summary>
-          <p>No. It is a relaxing browser mini game focused on satisfying dirty-to-clean feedback, not real fluid physics.</p>
+          <p>The full Unity3D source is included in this project. The current browser fallback is used until the Unity WebGL build is exported.</p>
         </details>
         <details>
           <summary>Can I play without installing anything?</summary>
-          <p>Yes. This MVP runs directly in the browser with HTML canvas and local game state.</p>
+          <p>Yes. The Unity WebGL build and browser fallback both run directly in the browser with no app download.</p>
         </details>
       </section>
     </main>
 
+    <script>
+      (() => {
+        const launch = document.querySelector("[data-unity-launch]");
+        const missing = document.querySelector("[data-unity-missing]");
+        const progress = document.querySelector("[data-unity-progress]");
+        const loaderUrl = "/games/carpet-cleaning/unity-build/Build/unity-build.loader.js";
+        const config = {
+          dataUrl: "/games/carpet-cleaning/unity-build/Build/unity-build.data",
+          frameworkUrl: "/games/carpet-cleaning/unity-build/Build/unity-build.framework.js",
+          codeUrl: "/games/carpet-cleaning/unity-build/Build/unity-build.wasm",
+          streamingAssetsUrl: "/games/carpet-cleaning/unity-build/StreamingAssets",
+          companyName: "Play Picks",
+          productName: "Carpet Cleaning 3D",
+          productVersion: "1.0.0"
+        };
+
+        launch?.addEventListener("click", () => {
+          if (window.createUnityInstance) {
+            missing.hidden = true;
+            window.createUnityInstance(document.querySelector("#unity-canvas"), config, (value) => {
+              if (progress) progress.style.width = `${Math.round(value * 100)}%`;
+            });
+            return;
+          }
+
+          const script = document.createElement("script");
+          script.src = loaderUrl;
+          script.onload = () => launch.click();
+          script.onerror = () => {
+            missing.hidden = false;
+            missing.querySelector("strong").textContent = "Unity build files are missing.";
+          };
+          document.body.appendChild(script);
+        });
+      })();
+    </script>
     <script src="/assets/app.js"></script>
     <script src="/assets/analytics.js"></script>
   </body>

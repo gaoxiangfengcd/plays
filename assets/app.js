@@ -173,6 +173,10 @@ function renderBoxes(kind) {
 }
 
 function flipCoin() {
+  if (typeof window.playPicksFlipCoin3D === "function") {
+    window.playPicksFlipCoin3D();
+    return;
+  }
   const coin = document.querySelector("[data-coin]");
   const result = Math.random() > 0.5 ? "Heads" : "Tails";
   coin.classList.add("flipping");
@@ -314,11 +318,7 @@ function initCarpetCleaning() {
   if (!canvas) return;
 
   const ctx = canvas.getContext("2d");
-  const levels = [
-    { name: "Level 1", title: "Small Bedroom Carpet", dirt: 0.34, reward: 50, scale: 0.82 },
-    { name: "Level 2", title: "Family Room Carpet", dirt: 0.62, reward: 100, scale: 0.94 },
-    { name: "Level 3", title: "Nightmare Carpet", dirt: 0.9, reward: 200, scale: 1 },
-  ];
+  const levels = getCarpetLevels();
   const toolsConfig = {
     soap: { label: "PSSSSHHH", radius: 34, power: 0.07, color: "rgba(255,255,255,0.9)" },
     water: { label: "SHHHHHHH", radius: 44, power: 0.13, color: "rgba(78,202,255,0.72)" },
@@ -339,6 +339,7 @@ function initCarpetCleaning() {
     complete: false,
     paused: false,
     raf: 0,
+    timer: 0,
     lastPoint: null,
     settingsReturn: "menu",
   };
@@ -346,6 +347,16 @@ function initCarpetCleaning() {
   bindCarpetUI(levels, toolsConfig);
   showCarpetScreen("menu");
   drawCarpetMenuPreview();
+}
+
+function getCarpetLevels() {
+  return [
+    { name: "Level 1", title: "Cozy Bedroom Rug", dirt: 0.28, reward: 50, scale: 0.78, palette: [[242, 145, 96], [54, 183, 166]] },
+    { name: "Level 2", title: "Family Room Carpet", dirt: 0.46, reward: 100, scale: 0.88, palette: [[77, 153, 226], [255, 199, 82]] },
+    { name: "Level 3", title: "Pet Mess Runner", dirt: 0.58, reward: 160, scale: 0.94, palette: [[150, 114, 230], [245, 245, 255]] },
+    { name: "Level 4", title: "Luxury Pattern Rug", dirt: 0.72, reward: 230, scale: 1, palette: [[210, 64, 84], [30, 42, 76]] },
+    { name: "Level 5", title: "Disaster Carpet", dirt: 0.88, reward: 350, scale: 1.04, palette: [[38, 188, 142], [255, 220, 82]] },
+  ];
 }
 
 function bindCarpetUI(levels, toolsConfig) {
@@ -372,7 +383,7 @@ function bindCarpetUI(levels, toolsConfig) {
     hideCarpetOverlay();
     showCarpetScreen("levels");
   });
-  document.querySelector("[data-carpet-next]")?.addEventListener("click", restartCarpet);
+  document.querySelectorAll("[data-carpet-next]").forEach((button) => button.addEventListener("click", nextCarpetLevel));
   document.querySelector("[data-carpet-settings-back]")?.addEventListener("click", () => {
     if (carpetState?.paused) showCarpetDialog("pause");
     else hideCarpetOverlay();
@@ -429,29 +440,39 @@ function hideCarpetOverlay() {
 }
 
 function startCarpetLevel(index, levels) {
-  carpetState.levelIndex = index;
-  carpetState.level = levels[index];
+  const safeIndex = Math.max(0, Math.min(levels.length - 1, index));
+  carpetState.levelIndex = safeIndex;
+  carpetState.level = levels[safeIndex];
   carpetState.startedAt = Date.now();
   carpetState.complete = false;
   carpetState.paused = false;
   carpetState.drawing = false;
   carpetState.lastPoint = null;
+  clearInterval(carpetState.timer);
+  carpetState.timer = window.setInterval(updateCarpetTimer, 1000);
   hideCarpetOverlay();
   showCarpetScreen("play");
-  document.querySelector("[data-carpet-level-title]").textContent = `${carpetState.level.name} · ${carpetState.level.title}`;
+  document.querySelector("[data-carpet-level-number]").textContent = String(safeIndex + 1);
+  document.querySelector("[data-carpet-level-title]").textContent = carpetState.level.title;
   document.querySelector("[data-carpet-coins]").textContent = `$${carpetState.coins}`;
   document.querySelector("[data-carpet-feedback]").textContent = "Hold left mouse and wash the dirty carpet.";
+  document.querySelectorAll(".level-thumb").forEach((thumb, thumbIndex) => {
+    thumb.classList.toggle("active", thumbIndex === safeIndex);
+  });
+  updateCarpetTimer();
   resetCarpetMask();
   renderCarpet();
   updateCarpetProgress();
 }
 
 function restartCarpet() {
-  startCarpetLevel(carpetState.levelIndex, [
-    { name: "Level 1", title: "Small Bedroom Carpet", dirt: 0.34, reward: 50, scale: 0.82 },
-    { name: "Level 2", title: "Family Room Carpet", dirt: 0.62, reward: 100, scale: 0.94 },
-    { name: "Level 3", title: "Nightmare Carpet", dirt: 0.9, reward: 200, scale: 1 },
-  ]);
+  startCarpetLevel(carpetState.levelIndex, getCarpetLevels());
+}
+
+function nextCarpetLevel() {
+  const levels = getCarpetLevels();
+  const nextIndex = carpetState.complete ? carpetState.levelIndex + 1 : carpetState.levelIndex;
+  startCarpetLevel(nextIndex >= levels.length ? 0 : nextIndex, levels);
 }
 
 function pauseCarpet() {
@@ -502,7 +523,8 @@ function renderCarpet() {
       const i = y * width + x;
       const p = i * 4;
       const stripe = Math.sin((x + y * 0.22) * 0.042) > 0 ? 1 : 0;
-      const base = stripe ? [77, 153, 176] : [238, 195, 102];
+      const palette = carpetState.level.palette || [[77, 153, 176], [238, 195, 102]];
+      const base = stripe ? palette[0] : palette[1];
       const mud = [88, 59, 40];
       const grease = [30, 31, 42];
       const d = dirt[i] * (1 - clean[i]);
@@ -519,19 +541,48 @@ function renderCarpet() {
 
 function drawCarpetDetails(ctx, width, height) {
   ctx.save();
-  ctx.globalAlpha = 0.28;
-  ctx.strokeStyle = "rgba(255,255,255,0.34)";
-  ctx.lineWidth = 3;
-  for (let x = 34; x < width; x += 56) {
+  ctx.globalAlpha = 0.42;
+  ctx.strokeStyle = "rgba(12,28,42,0.58)";
+  ctx.lineWidth = 8;
+  ctx.strokeRect(58, 58, width - 116, height - 116);
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = "rgba(255,247,223,0.5)";
+  ctx.strokeRect(82, 82, width - 164, height - 164);
+
+  for (let ring = 0; ring < 5; ring += 1) {
+    const inset = 108 + ring * 22;
+    ctx.beginPath();
+    ctx.ellipse(width / 2, height / 2, Math.max(24, width / 2 - inset), Math.max(20, height / 2 - inset * 0.62), 0, 0, Math.PI * 2);
+    ctx.strokeStyle = ring % 2 ? "rgba(201,72,56,0.42)" : "rgba(19,67,92,0.44)";
+    ctx.lineWidth = ring % 2 ? 4 : 6;
+    ctx.stroke();
+  }
+
+  for (let i = 0; i < 34; i += 1) {
+    const x = 96 + (i * 73) % (width - 192);
+    const y = 96 + (i * 47) % (height - 192);
+    ctx.beginPath();
+    ctx.ellipse(x, y, 14 + (i % 5) * 3, 8 + (i % 3) * 4, i * 0.6, 0, Math.PI * 2);
+    ctx.fillStyle = i % 2 ? "rgba(17,68,90,0.38)" : "rgba(172,55,45,0.33)";
+    ctx.fill();
+  }
+
+  ctx.globalAlpha = 0.22;
+  ctx.strokeStyle = "rgba(255,255,255,0.38)";
+  ctx.lineWidth = 2;
+  for (let x = 34; x < width; x += 42) {
     ctx.beginPath();
     ctx.moveTo(x, 18);
-    ctx.lineTo(x - 22, height - 18);
+    ctx.lineTo(x - 14, height - 18);
     ctx.stroke();
   }
   ctx.globalAlpha = 1;
-  ctx.lineWidth = 18;
-  ctx.strokeStyle = "rgba(255,247,223,0.85)";
+  ctx.lineWidth = 20;
+  ctx.strokeStyle = "rgba(82,36,22,0.88)";
   ctx.strokeRect(8, 8, width - 16, height - 16);
+  ctx.lineWidth = 6;
+  ctx.strokeStyle = "rgba(255,247,223,0.76)";
+  ctx.strokeRect(28, 28, width - 56, height - 56);
   ctx.restore();
 }
 
@@ -611,13 +662,25 @@ function updateCarpetProgress() {
   }
   const rawProgress = Math.round((removed / dirtyTotal) * 100);
   const progress = rawProgress >= 96 ? 100 : Math.min(100, rawProgress);
-  document.querySelector("[data-carpet-progress]").textContent = `${progress}%`;
-  document.querySelector("[data-carpet-bar]").style.width = `${progress}%`;
+  document.querySelectorAll("[data-carpet-progress]").forEach((node) => {
+    node.textContent = `${progress}%`;
+  });
+  document.querySelectorAll("[data-carpet-bar]").forEach((node) => {
+    node.style.width = `${progress}%`;
+  });
+  const ring = document.querySelector("[data-carpet-ring]");
+  if (ring) ring.style.setProperty("--clean", `${progress}%`);
+  const ringText = document.querySelector("[data-carpet-progress-ring]");
+  if (ringText) ringText.textContent = `${progress}%`;
+  document.querySelector("[data-objective-stains]")?.classList.toggle("done", progress >= 65);
+  document.querySelector("[data-objective-finish]")?.classList.toggle("done", progress >= 100);
+  document.querySelector("[data-carpet-live-stars]").textContent = progress >= 100 ? "★★★★★" : progress >= 60 ? "★★★★☆" : "★★★☆☆";
   if (progress >= 100 && !carpetState.complete) completeCarpet();
 }
 
 function completeCarpet() {
   carpetState.complete = true;
+  clearInterval(carpetState.timer);
   carpetState.coins += carpetState.level.reward;
   localStorage.setItem("carpetCoins", String(carpetState.coins));
   document.querySelector("[data-carpet-coins]").textContent = `$${carpetState.coins}`;
@@ -630,6 +693,13 @@ function completeCarpet() {
     document.querySelector("[data-carpet-shine]").classList.remove("active");
     showCarpetDialog("result");
   }, 700);
+}
+
+function updateCarpetTimer() {
+  if (!carpetState || !carpetState.startedAt || carpetState.paused) return;
+  const seconds = Math.max(0, Math.floor((Date.now() - carpetState.startedAt) / 1000));
+  const timer = document.querySelector("[data-carpet-timer]");
+  if (timer) timer.textContent = `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
 }
 
 function moveCarpetCursor(event) {

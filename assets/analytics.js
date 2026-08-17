@@ -56,9 +56,9 @@
       return;
     }
 
-    var card = e.target.closest(".card");
+    var card = e.target.closest(".card, .pp-quick-card, .pp-3d-card, .pp-new-card, .pp-cat-card, .pp-hero-card");
     if (card) {
-      var titleEl = card.querySelector("h3");
+      var titleEl = card.querySelector("h3, strong");
       track("game_card_click", {
         game: titleEl ? titleEl.textContent.trim() : card.getAttribute("href"),
         href: card.getAttribute("href") || "",
@@ -66,7 +66,7 @@
       return;
     }
 
-    var navLink = e.target.closest(".nav a, .play-btn, .mini-btn, .pill, .related-list a");
+    var navLink = e.target.closest(".nav a, .pp-links a, .pp-random, .btn-primary, .btn-ghost, .sec-more, .play-btn, .mini-btn, .pill, .related-list a, .foot-col a");
     if (navLink) {
       track("outbound_nav", {
         label: (navLink.textContent || "").trim().slice(0, 60),
