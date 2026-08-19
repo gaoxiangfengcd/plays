@@ -71,10 +71,11 @@ function cover(file, alt) {
 // [title, href, iconKey, minutes, players]
 const quickGames = [
   ["3D Coin Flip", "/tools/flip-a-coin/", "coin", "1 min", "12.5K"],
+  ["Easy Decision Maker", "/tools/decision-maker/", "bubble", "1 min", "9.8K"],
   ["Spin the Wheel", "/tools/spin-the-wheel/", "wheel", "2 min", "11.0K"],
-  ["Pick a Card", "/tools/pick-a-card/", "card", "1 min", "9.3K"],
   ["Dice Roller", "/tools/dice-roller/", "dice", "1 min", "8.7K"],
   ["Random Name Picker", "/tools/random-name-picker/", "gift", "1 min", "7.1K"],
+  ["Pick a Card", "/tools/pick-a-card/", "card", "1 min", "9.3K"],
   ["Would You Rather", "/games/would-you-rather/", "bubble", "2 min", "10.2K"],
   ["Memory Match", "/games/memory-match/", "star", "3 min", "15.5K"],
   ["Truth or Dare", "/games/truth-or-dare/", "heartcard", "2 min", "8.2K"],
@@ -119,17 +120,17 @@ const SOON_NEW = new Set(["Bubble Shooter", "Color Match", "Parking Jam", "Word 
 
 // only real, playable pages feed the random picker
 const randomLinks = [
+  "/tools/flip-a-coin/",
+  "/tools/decision-maker/",
+  "/tools/spin-the-wheel/",
+  "/tools/dice-roller/",
+  "/tools/random-name-picker/",
   "/games/carpet-cleaning/",
   "/games/memory-match/",
   "/games/truth-or-dare/",
   "/games/would-you-rather/",
-  "/tools/spin-the-wheel/",
-  "/tools/flip-a-coin/",
-  "/tools/dice-roller/",
-  "/tools/random-name-picker/",
   "/tools/pick-a-card/",
   "/tools/mystery-box-picker/",
-  "/tools/decision-maker/",
 ];
 
 function renderQuickGames() {

@@ -1152,6 +1152,17 @@ body[data-tool="flip-a-coin"] .coin-panel {
   padding: 28px;
 }
 
+body[data-tool="flip-a-coin"] .coin-panel > p {
+  max-width: 880px;
+  color: var(--coin-muted);
+  line-height: 1.72;
+  font-weight: 650;
+}
+
+body[data-tool="flip-a-coin"] .coin-panel > p:first-of-type {
+  margin-top: 16px;
+}
+
 body[data-tool="flip-a-coin"] .coin-steps {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -4283,5 +4294,1249 @@ body.home-v2 a {
   .category-row,
   .popular-row {
     grid-template-columns: none;
+  }
+}
+
+/* Easy Decision Maker uses the same bright game-detail shell as 3D Coin Flip. */
+body[data-tool="decision-maker"] {
+  --coin-bg: #f6f8ff;
+  --coin-ink: #15172c;
+  --coin-muted: #6f7894;
+  --coin-line: #e8edf6;
+  --coin-purple: #6c5ce7;
+  --coin-purple-dark: #4b2af0;
+  --coin-blue: #2f7cff;
+  --coin-pink: #ff5fa2;
+  min-height: 100vh;
+  color: var(--coin-ink);
+  background:
+    radial-gradient(circle at 14% 12%, rgba(108, 92, 231, 0.13), transparent 30%),
+    radial-gradient(circle at 82% 18%, rgba(255, 95, 162, 0.1), transparent 28%),
+    linear-gradient(180deg, #fbfcff 0%, var(--coin-bg) 48%, #ffffff 100%);
+}
+
+body[data-tool="decision-maker"]::before {
+  display: none;
+}
+
+body[data-tool="decision-maker"] .decision-page {
+  width: min(1280px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 30px 0 0;
+}
+
+body[data-tool="decision-maker"] .coin-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--coin-muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+body[data-tool="decision-maker"] .coin-breadcrumb span::before,
+body[data-tool="decision-maker"] .coin-breadcrumb strong::before {
+  content: "/";
+  margin-right: 10px;
+  color: #b3bad0;
+}
+
+body[data-tool="decision-maker"] .coin-breadcrumb strong {
+  color: var(--coin-purple);
+}
+
+body[data-tool="decision-maker"] .coin-title-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  margin-top: 24px;
+}
+
+body[data-tool="decision-maker"] .coin-title-lockup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+body[data-tool="decision-maker"] .coin-title-icon {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--coin-pink), var(--coin-purple));
+  font-size: 30px;
+  font-weight: 1000;
+  box-shadow: 0 12px 26px rgba(108, 92, 231, 0.22);
+}
+
+body[data-tool="decision-maker"] .coin-title-row h1 {
+  margin: 0;
+  color: var(--coin-ink);
+  font-size: clamp(34px, 4.8vw, 58px);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+body[data-tool="decision-maker"] .coin-title-row p {
+  margin: 10px 0 0;
+  max-width: 620px;
+  color: var(--coin-muted);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+body[data-tool="decision-maker"] .coin-title-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+body[data-tool="decision-maker"] .coin-soft-btn {
+  min-height: 42px;
+  border: 1px solid var(--coin-line);
+  border-radius: 999px;
+  padding: 0 16px;
+  color: var(--coin-ink);
+  background: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  box-shadow: 0 8px 22px rgba(22, 38, 77, 0.06);
+  cursor: pointer;
+}
+
+body[data-tool="decision-maker"] .coin-game-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  align-items: start;
+  margin-top: 26px;
+}
+
+body[data-tool="decision-maker"] .coin-tool-shell,
+body[data-tool="decision-maker"] .coin-info-card,
+body[data-tool="decision-maker"] .coin-panel,
+body[data-tool="decision-maker"] .coin-faq details,
+body[data-tool="decision-maker"] .coin-card-row a {
+  border: 1px solid var(--coin-line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 12px 28px rgba(26, 49, 98, 0.07);
+}
+
+body[data-tool="decision-maker"] .coin-tool-shell {
+  overflow: hidden;
+}
+
+body[data-tool="decision-maker"] .decision-play-body {
+  padding: 24px;
+  display: grid;
+  gap: 18px;
+}
+
+body[data-tool="decision-maker"] .decision-board {
+  min-height: 430px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 18px;
+  padding: 18px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(108, 92, 231, 0.14), transparent 32%),
+    radial-gradient(circle at 86% 72%, rgba(255, 95, 162, 0.12), transparent 30%),
+    linear-gradient(135deg, #f9fbff, #eef4ff);
+}
+
+body[data-tool="decision-maker"] .decision-input-card,
+body[data-tool="decision-maker"] .decision-result-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  border: 1px solid #e4ebf6;
+  border-radius: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+body[data-tool="decision-maker"] .decision-input-card > span,
+body[data-tool="decision-maker"] .decision-result-card > span {
+  color: var(--coin-muted);
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+body[data-tool="decision-maker"] .decision-template-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+body[data-tool="decision-maker"] .decision-template-row button {
+  min-height: 32px;
+  border: 1px solid #e0e7f4;
+  border-radius: 999px;
+  padding: 0 12px;
+  color: var(--coin-purple);
+  background: #f5f2ff;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+body[data-tool="decision-maker"] .decision-template-row button:hover {
+  border-color: rgba(108, 92, 231, 0.35);
+  background: #eee9ff;
+}
+
+body[data-tool="decision-maker"] .decision-template-row button.is-active {
+  color: #fff;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--coin-purple), var(--coin-purple-dark));
+}
+
+/* Spin the Wheel detail page */
+body[data-tool="spin-the-wheel"] {
+  --wheel-ink: #10183a;
+  --wheel-muted: #5c668b;
+  --wheel-line: #e8ecf6;
+  --wheel-purple: #6c3cff;
+  --wheel-purple-dark: #4a28e8;
+  --wheel-blue: #2f73ff;
+  color: var(--wheel-ink);
+  background:
+    radial-gradient(circle at 13% 10%, rgba(108, 60, 255, 0.09), transparent 26%),
+    radial-gradient(circle at 88% 8%, rgba(47, 115, 255, 0.08), transparent 24%),
+    linear-gradient(180deg, #fbfcff 0%, #f5f7ff 52%, #ffffff 100%);
+}
+
+body[data-tool="spin-the-wheel"]::before {
+  display: none;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-page {
+  padding: 24px 0 0;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-wrap-page {
+  width: min(1280px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--wheel-muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-breadcrumb span::before,
+body[data-tool="spin-the-wheel"] .wheel-breadcrumb strong::before {
+  content: "/";
+  margin-right: 10px;
+  color: #bac2d8;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-breadcrumb strong {
+  color: var(--wheel-ink);
+}
+
+body[data-tool="spin-the-wheel"] .wheel-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 22px;
+  margin-top: 28px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-title-lockup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-title-icon {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 12px 26px rgba(20, 28, 62, 0.1);
+  font-size: 34px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-title-row h1 {
+  margin: 0;
+  color: var(--wheel-ink);
+  font-size: clamp(34px, 4.2vw, 52px);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-title-row p {
+  margin: 10px 0 0;
+  color: var(--wheel-muted);
+  font-size: 18px;
+  font-weight: 650;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-title-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-title-actions button,
+body[data-tool="spin-the-wheel"] .wheel-card-head button {
+  min-height: 44px;
+  border: 1px solid var(--wheel-line);
+  border-radius: 14px;
+  padding: 0 18px;
+  color: #324064;
+  background: #fff;
+  font-weight: 900;
+  box-shadow: 0 8px 22px rgba(28, 39, 80, 0.06);
+  cursor: pointer;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-game-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 390px;
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 22px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-stage-card {
+  position: relative;
+  min-height: 580px;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: center;
+  padding: 24px;
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(86, 65, 255, 0.28), transparent 36%),
+    radial-gradient(circle at 10% 12%, rgba(255, 255, 255, 0.12), transparent 18%),
+    linear-gradient(145deg, #101842 0%, #09102f 55%, #070c24 100%);
+  box-shadow: 0 20px 48px rgba(13, 20, 52, 0.22);
+}
+
+body[data-tool="spin-the-wheel"] .wheel-stage-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.36) 0 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(132,160,255,0.28) 0 1px, transparent 1.5px);
+  background-position: 10px 10px, 80px 60px;
+  background-size: 120px 140px, 180px 160px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-sound,
+body[data-tool="spin-the-wheel"] .wheel-result-pill {
+  position: absolute;
+  z-index: 4;
+  top: 24px;
+  min-height: 48px;
+  border: 0;
+  border-radius: 12px;
+  padding: 0 18px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.11);
+  font-weight: 900;
+  backdrop-filter: blur(10px);
+}
+
+body[data-tool="spin-the-wheel"] .wheel-sound {
+  left: 24px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-result-pill {
+  right: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-result-pill strong {
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-3d-scene {
+  position: relative;
+  z-index: 2;
+  min-height: 454px;
+  align-self: center;
+  display: grid;
+  place-items: center;
+  padding: 26px 0 10px;
+  perspective: 1200px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-3d-frame {
+  position: relative;
+  z-index: 2;
+  width: min(420px, 76vw);
+  aspect-ratio: 1;
+  transform: rotateX(9deg);
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 30px 34px rgba(0, 0, 0, 0.38));
+}
+
+body[data-tool="spin-the-wheel"] .wheel-3d-frame::before {
+  display: none;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-3d-canvas {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 0;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+  display: block;
+  border-radius: 50%;
+  transition: transform 4.1s cubic-bezier(0.12, 0.72, 0.12, 1);
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-3d-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-3d-center {
+  display: none;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-pointer-3d {
+  position: absolute;
+  z-index: 7;
+  top: 14px;
+  left: 50%;
+  width: 38px;
+  height: 54px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #ffe893, #eda11f 52%, #9d5311);
+  clip-path: polygon(50% 100%, 90% 18%, 10% 18%);
+  filter: drop-shadow(0 6px 6px rgba(0,0,0,0.24));
+}
+
+body[data-tool="spin-the-wheel"] .wheel-pointer-3d::after {
+  content: none;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-stand {
+  position: absolute;
+  z-index: 0;
+  bottom: 20px;
+  left: 50%;
+  width: min(360px, 68vw);
+  height: 70px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(143, 73, 255, 0.95), rgba(99, 49, 202, 0.32) 30%, transparent 52%),
+    linear-gradient(180deg, #323352, #17172b);
+  box-shadow: inset 0 18px 24px rgba(255,255,255,0.08), 0 18px 20px rgba(0,0,0,0.38);
+}
+
+body[data-tool="spin-the-wheel"] .wheel-spin-button {
+  position: relative;
+  z-index: 3;
+  width: min(360px, 72%);
+  min-height: 62px;
+  display: block;
+  margin: -4px auto 2px;
+  border: 0;
+  border-radius: 15px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--wheel-purple), var(--wheel-purple-dark));
+  box-shadow: 0 14px 26px rgba(94, 55, 244, 0.42);
+  font-size: 22px;
+  font-weight: 1000;
+  cursor: pointer;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-toggle input {
+  width: 44px;
+  height: 24px;
+  accent-color: var(--wheel-purple);
+}
+
+body[data-tool="spin-the-wheel"] .wheel-side,
+body[data-tool="spin-the-wheel"] .wheel-history,
+body[data-tool="spin-the-wheel"] .wheel-settings-grid,
+body[data-tool="spin-the-wheel"] .wheel-card-row {
+  display: grid;
+  gap: 18px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-info-card,
+body[data-tool="spin-the-wheel"] .wheel-how-card,
+body[data-tool="spin-the-wheel"] .wheel-options-panel,
+body[data-tool="spin-the-wheel"] .wheel-settings-panel,
+body[data-tool="spin-the-wheel"] .wheel-card-row a,
+body[data-tool="spin-the-wheel"] .wheel-seo-copy {
+  border: 1px solid var(--wheel-line);
+  border-radius: 18px;
+  background: rgba(255,255,255,0.94);
+  box-shadow: 0 12px 30px rgba(25, 38, 82, 0.07);
+}
+
+body[data-tool="spin-the-wheel"] .wheel-info-card {
+  padding: 24px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-info-card h2,
+body[data-tool="spin-the-wheel"] .wheel-how-card h2,
+body[data-tool="spin-the-wheel"] .wheel-options-panel h2,
+body[data-tool="spin-the-wheel"] .wheel-settings-panel h2,
+body[data-tool="spin-the-wheel"] .wheel-recommend h2 {
+  margin: 0 0 16px;
+  color: var(--wheel-ink);
+  font-size: 22px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-info-card p {
+  color: var(--wheel-muted);
+  line-height: 1.7;
+  font-weight: 650;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #fbfcff;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-stat-grid div {
+  min-height: 92px;
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  padding: 18px;
+  border-right: 1px solid var(--wheel-line);
+  border-bottom: 1px solid var(--wheel-line);
+}
+
+body[data-tool="spin-the-wheel"] .wheel-stat-grid span {
+  color: var(--wheel-muted);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-stat-grid strong {
+  color: var(--wheel-ink);
+  font-size: 24px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-card-head,
+body[data-tool="spin-the-wheel"] .wheel-section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-card-head button {
+  min-height: auto;
+  padding: 0;
+  border: 0;
+  color: var(--wheel-purple);
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-history div {
+  display: grid;
+  grid-template-columns: 14px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  color: var(--wheel-ink);
+  font-weight: 850;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-history i,
+body[data-tool="spin-the-wheel"] .wheel-option-row i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--dot);
+}
+
+body[data-tool="spin-the-wheel"] .wheel-history span {
+  color: var(--wheel-muted);
+  font-weight: 700;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-how-card {
+  margin-top: 18px;
+  padding: 24px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-how-card > div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-how-card article {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 5px 16px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-how-card article span {
+  grid-row: span 2;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, var(--wheel-purple), var(--wheel-purple-dark));
+  font-size: 20px;
+  font-weight: 1000;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-how-card p {
+  margin: 0;
+  color: var(--wheel-muted);
+  line-height: 1.5;
+  font-weight: 650;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-settings-grid {
+  grid-template-columns: 1fr 1fr;
+  margin-top: 18px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-options-panel,
+body[data-tool="spin-the-wheel"] .wheel-settings-panel {
+  padding: 24px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-option-list {
+  display: grid;
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid var(--wheel-line);
+  border-radius: 14px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-option-row {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--wheel-line);
+  background: #fff;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-option-row:last-child {
+  border-bottom: 0;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-drag {
+  flex: 0 0 26px;
+  color: #9ba6c4;
+  font-weight: 900;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-option-row input {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+  border: 0;
+  color: var(--wheel-ink);
+  background: transparent;
+  font-weight: 900;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-option-row i {
+  flex: 0 0 12px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-option-row button {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  color: #7c85a6;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-add-option {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 12px;
+  border: 1px dashed rgba(108, 60, 255, 0.35);
+  border-radius: 12px;
+  color: var(--wheel-purple);
+  background: #fff;
+  font-weight: 950;
+  cursor: pointer;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-theme-dots,
+body[data-tool="spin-the-wheel"] .wheel-settings-panel label span {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-theme-dots button {
+  height: 48px;
+  border: 1px solid var(--wheel-line);
+  border-radius: 13px;
+  background: conic-gradient(#f44336, #ff8a00, #42b94a, #2f6fec, #7c3fe0, #e72d86, #f44336);
+  cursor: pointer;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-theme-dots button.is-active {
+  box-shadow: 0 0 0 3px rgba(108,60,255,0.22);
+}
+
+body[data-tool="spin-the-wheel"] .wheel-settings-panel label {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+  color: var(--wheel-muted);
+  font-weight: 850;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-settings-panel label span {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+body[data-tool="spin-the-wheel"] .wheel-settings-panel label button {
+  min-height: 42px;
+  border: 1px solid var(--wheel-line);
+  border-radius: 10px;
+  color: var(--wheel-ink);
+  background: #fff;
+  font-weight: 900;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-settings-panel label button.is-active {
+  color: #fff;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--wheel-purple), var(--wheel-purple-dark));
+}
+
+body[data-tool="spin-the-wheel"] .wheel-settings-panel p {
+  display: grid;
+  grid-template-columns: 140px 1fr 44px;
+  gap: 14px;
+  align-items: center;
+  margin: 18px 0 0;
+  color: var(--wheel-muted);
+}
+
+body[data-tool="spin-the-wheel"] .wheel-settings-panel p strong {
+  color: var(--wheel-ink);
+}
+
+body[data-tool="spin-the-wheel"] .wheel-settings-panel input[type="checkbox"] {
+  width: 44px;
+  height: 24px;
+  accent-color: var(--wheel-purple);
+}
+
+body[data-tool="spin-the-wheel"] .wheel-recommend {
+  margin-top: 28px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-card-row {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin-top: 16px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-card-row a {
+  min-height: 170px;
+  display: grid;
+  grid-template-rows: 78px auto auto;
+  gap: 7px;
+  padding: 14px;
+  color: var(--wheel-ink);
+}
+
+body[data-tool="spin-the-wheel"] .wheel-card-row img {
+  width: min(92px, 100%);
+  height: 78px;
+  justify-self: center;
+  object-fit: contain;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-card-row span {
+  color: var(--wheel-muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-seo-copy {
+  margin-top: 24px;
+  padding: 26px;
+}
+
+body[data-tool="spin-the-wheel"] .wheel-footer {
+  margin-top: 40px;
+}
+
+@media (max-width: 1080px) {
+  body[data-tool="spin-the-wheel"] .wheel-game-grid,
+  body[data-tool="spin-the-wheel"] .wheel-settings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-tool="spin-the-wheel"] .wheel-card-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  body[data-tool="spin-the-wheel"] .wheel-wrap-page {
+    width: min(100% - 24px, 1280px);
+  }
+
+  body[data-tool="spin-the-wheel"] .wheel-title-row,
+  body[data-tool="spin-the-wheel"] .wheel-title-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  body[data-tool="spin-the-wheel"] .wheel-stage-card {
+    min-height: 590px;
+    padding: 16px;
+  }
+
+  body[data-tool="spin-the-wheel"] .wheel-3d-scene {
+    min-height: 420px;
+  }
+
+  body[data-tool="spin-the-wheel"] .wheel-how-card > div,
+  body[data-tool="spin-the-wheel"] .wheel-card-row {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-tool="spin-the-wheel"] .wheel-sound,
+  body[data-tool="spin-the-wheel"] .wheel-result-pill {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin: 0 8px 8px 0;
+  }
+}
+
+body[data-tool="decision-maker"] textarea[data-items] {
+  min-height: 260px;
+  border: 1px solid #dfe7f4;
+  border-radius: 16px;
+  padding: 16px;
+  color: var(--coin-ink);
+  background: #fff;
+  font-size: 17px;
+  font-weight: 750;
+  line-height: 1.6;
+  box-shadow: none;
+}
+
+body[data-tool="decision-maker"] textarea[data-items]:focus {
+  border-color: var(--coin-purple);
+  box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.12);
+}
+
+body[data-tool="decision-maker"] .decision-result-card {
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+body[data-tool="decision-maker"] .decision-result-card strong {
+  width: 100%;
+  min-height: 140px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  padding: 18px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--coin-purple), var(--coin-blue));
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: 1.12;
+  box-shadow: 0 16px 34px rgba(75, 42, 240, 0.22);
+  overflow-wrap: anywhere;
+}
+
+body[data-tool="decision-maker"] .decision-result-card small {
+  color: var(--coin-muted);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+body[data-tool="decision-maker"] .coin-main-actions {
+  display: flex;
+  gap: 14px;
+}
+
+body[data-tool="decision-maker"] .coin-main-actions .btn {
+  flex: 1;
+  min-height: 54px;
+  border: 0;
+  border-radius: 14px;
+  box-shadow: none;
+  font-size: 15px;
+}
+
+body[data-tool="decision-maker"] .coin-main-actions .btn:nth-child(2) {
+  flex: 0.72;
+}
+
+body[data-tool="decision-maker"] .coin-main-actions .btn.primary {
+  color: #fff;
+  background: linear-gradient(135deg, var(--coin-purple), var(--coin-purple-dark));
+}
+
+body[data-tool="decision-maker"] .coin-main-actions .btn:not(.primary) {
+  color: var(--coin-purple);
+  background: #f0edff;
+}
+
+body[data-tool="decision-maker"] .coin-side-stack {
+  display: grid;
+  gap: 22px;
+  align-content: start;
+}
+
+body[data-tool="decision-maker"] .coin-info-card {
+  padding: 22px;
+}
+
+body[data-tool="decision-maker"] .coin-info-card h2,
+body[data-tool="decision-maker"] .coin-panel h2,
+body[data-tool="decision-maker"] .coin-recommend h2,
+body[data-tool="decision-maker"] .coin-faq h2 {
+  margin: 0;
+  color: var(--coin-ink);
+  font-size: 21px;
+}
+
+body[data-tool="decision-maker"] .coin-info-card p,
+body[data-tool="decision-maker"] .coin-panel > p,
+body[data-tool="decision-maker"] .coin-faq p {
+  color: var(--coin-muted);
+  line-height: 1.72;
+  font-weight: 650;
+}
+
+body[data-tool="decision-maker"] .coin-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 24px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #f8faff;
+}
+
+body[data-tool="decision-maker"] .coin-stat-grid div {
+  min-height: 76px;
+  padding: 14px 16px;
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  border-right: 1px solid #edf1f8;
+  border-bottom: 1px solid #edf1f8;
+}
+
+body[data-tool="decision-maker"] .coin-stat-grid span {
+  color: var(--coin-muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+body[data-tool="decision-maker"] .coin-stat-grid strong {
+  color: var(--coin-ink);
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+body[data-tool="decision-maker"] .coin-card-head,
+body[data-tool="decision-maker"] .coin-section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+body[data-tool="decision-maker"] .coin-history-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+body[data-tool="decision-maker"] .coin-history-list p {
+  margin: 0;
+  padding: 13px 14px;
+  border-radius: 12px;
+  color: var(--coin-muted);
+  background: #f8faff;
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+body[data-tool="decision-maker"] .coin-panel {
+  margin-top: 26px;
+  padding: 28px;
+}
+
+body[data-tool="decision-maker"] .coin-panel > p {
+  max-width: 880px;
+}
+
+body[data-tool="decision-maker"] .coin-panel > p:first-of-type {
+  margin-top: 16px;
+}
+
+body[data-tool="decision-maker"] .coin-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 34px;
+  margin-top: 24px;
+}
+
+body[data-tool="decision-maker"] .coin-steps article {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 4px 18px;
+  align-items: center;
+}
+
+body[data-tool="decision-maker"] .coin-steps span {
+  grid-row: span 2;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, var(--coin-pink), var(--coin-purple));
+  font-size: 20px;
+  font-weight: 1000;
+}
+
+body[data-tool="decision-maker"] .coin-steps strong {
+  color: var(--coin-ink);
+}
+
+body[data-tool="decision-maker"] .coin-steps p {
+  grid-column: 2;
+  margin: 0;
+  color: var(--coin-muted);
+  line-height: 1.5;
+  font-weight: 650;
+}
+
+body[data-tool="decision-maker"] .coin-recommend,
+body[data-tool="decision-maker"] .coin-faq {
+  margin-top: 36px;
+}
+
+body[data-tool="decision-maker"] .coin-card-row {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+body[data-tool="decision-maker"] .coin-card-row a {
+  min-height: 190px;
+  display: grid;
+  grid-template-rows: 92px auto auto;
+  gap: 7px;
+  padding: 16px 14px;
+  color: var(--coin-ink);
+  overflow: hidden;
+}
+
+body[data-tool="decision-maker"] .coin-card-row img {
+  width: min(100px, 100%);
+  height: 92px;
+  justify-self: center;
+  object-fit: contain;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-tool="decision-maker"] .coin-card-row strong {
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+body[data-tool="decision-maker"] .coin-card-row span {
+  color: var(--coin-muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+body[data-tool="decision-maker"] .coin-faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+body[data-tool="decision-maker"] .coin-faq details {
+  padding: 20px;
+}
+
+body[data-tool="decision-maker"] .coin-faq summary {
+  cursor: pointer;
+  color: var(--coin-ink);
+  font-weight: 950;
+}
+
+body[data-tool="decision-maker"] .coin-footer {
+  margin-top: 40px;
+  color: #d8dcff;
+  background: #17172d;
+}
+
+body[data-tool="decision-maker"] .coin-footer > div {
+  width: min(1280px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 40px 0;
+  display: grid;
+  grid-template-columns: 1.45fr 1fr 1fr 1.25fr;
+  gap: 28px;
+}
+
+body[data-tool="decision-maker"] .coin-footer p,
+body[data-tool="decision-maker"] .coin-footer a {
+  color: #adb4d8;
+  line-height: 1.6;
+}
+
+body[data-tool="decision-maker"] .coin-footer a {
+  display: block;
+  margin-top: 8px;
+}
+
+body[data-tool="decision-maker"] .coin-footer h3,
+body[data-tool="decision-maker"] .coin-footer strong {
+  color: #fff;
+}
+
+body[data-tool="decision-maker"] .coin-footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+body[data-tool="decision-maker"] .coin-subscribe {
+  display: flex;
+  gap: 8px;
+}
+
+body[data-tool="decision-maker"] .coin-subscribe input {
+  height: 42px;
+  border: 1px solid #343957;
+  border-radius: 10px;
+  color: #fff;
+  background: #222641;
+}
+
+body[data-tool="decision-maker"] .coin-subscribe button {
+  border: 0;
+  border-radius: 10px;
+  padding: 0 14px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--coin-purple), var(--coin-purple-dark));
+  font-weight: 900;
+}
+
+body[data-tool="decision-maker"] .coin-footer-bottom {
+  width: min(1280px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 18px 0;
+  border-top: 1px solid #292e4a;
+  color: #8389ae;
+  font-size: 12px;
+}
+
+@media (max-width: 1080px) {
+  body[data-tool="decision-maker"] .coin-game-grid,
+  body[data-tool="decision-maker"] .decision-board {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-tool="decision-maker"] .coin-card-row,
+  body[data-tool="decision-maker"] .coin-footer > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  body[data-tool="decision-maker"] .decision-page,
+  body[data-tool="decision-maker"] .coin-footer > div,
+  body[data-tool="decision-maker"] .coin-footer-bottom {
+    width: min(100% - 24px, 1280px);
+  }
+
+  body[data-tool="decision-maker"] .coin-title-row,
+  body[data-tool="decision-maker"] .coin-title-lockup,
+  body[data-tool="decision-maker"] .coin-main-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  body[data-tool="decision-maker"] .coin-title-actions {
+    display: none;
+  }
+
+  body[data-tool="decision-maker"] .coin-stat-grid,
+  body[data-tool="decision-maker"] .coin-steps,
+  body[data-tool="decision-maker"] .coin-faq-grid,
+  body[data-tool="decision-maker"] .coin-card-row,
+  body[data-tool="decision-maker"] .coin-footer > div {
+    grid-template-columns: 1fr;
   }
 }

@@ -1,6 +1,6 @@
 const tools = {
   "spin-the-wheel": {
-    defaults: ["Pizza", "Tacos", "Sushi", "Burgers", "Salad", "Noodles"],
+    defaults: ["Pizza", "Burger", "Sushi", "Ramen", "Pasta", "Salad", "Steak", "Tacos"],
     type: "wheel",
   },
   "random-name-picker": {
@@ -53,7 +53,15 @@ const tools = {
   },
 };
 
-const colors = ["#3767ff", "#16a6c9", "#23a36d", "#ffbd3d", "#ee5d8f", "#7b61ff", "#ff7b54", "#00a88f"];
+const colors = ["#f44336", "#ff8a00", "#7c3fe0", "#2f6fec", "#39aee0", "#42b94a", "#f4b400", "#e72d86"];
+const wheelEmojis = ["🍕", "🍔", "🍣", "🍜", "🍝", "🥗", "🥩", "🌮", "🎁", "⭐", "🎲", "🎯"];
+const decisionTemplates = {
+  food: ["Pizza", "Burgers", "Sushi", "Tacos", "Pasta", "Salad"],
+  games: ["3D Coin Flip", "Spin the Wheel", "Dice Roller", "Pick a Card", "Memory Match", "Truth or Dare"],
+  tasks: ["Start the hardest task", "Reply to messages", "Clean your desk", "Take a short break", "Plan tomorrow", "Finish one small thing"],
+  yesno: ["Yes", "No", "Maybe later", "Ask again", "Try once", "Skip it"],
+  teams: ["Team A", "Team B", "Team C", "Team D", "Player 1", "Player 2"],
+};
 let rotation = 0;
 let history = [];
 let memoryState = { first: null, lock: false, matches: 0 };
@@ -84,42 +92,70 @@ function setResult(text) {
   history = history.slice(0, 8);
   const historyNode = document.querySelector("[data-history]");
   if (historyNode) historyNode.textContent = history.join(" · ");
+  renderWheelHistory();
 }
 
 function buildWheel(items) {
   const wheel = document.querySelector("[data-wheel]");
-  if (!wheel) return;
+  if (!wheel) {
+    if (typeof window.playPicksWheel3DSetItems === "function") window.playPicksWheel3DSetItems(items);
+    return;
+  }
   const size = wheel.width;
   const ctx = wheel.getContext("2d");
   const center = size / 2;
-  const radius = center - 16;
+  const radius = center - 70;
   const slice = (Math.PI * 2) / items.length;
   ctx.clearRect(0, 0, size, size);
+
+  const shadow = ctx.createRadialGradient(center, center + 30, radius * 0.25, center, center + 30, radius * 1.15);
+  shadow.addColorStop(0, "rgba(36, 10, 89, 0.12)");
+  shadow.addColorStop(0.68, "rgba(36, 10, 89, 0.25)");
+  shadow.addColorStop(1, "rgba(0, 0, 0, 0)");
+  ctx.beginPath();
+  ctx.ellipse(center, center + radius * 0.72, radius * 0.86, radius * 0.18, 0, 0, Math.PI * 2);
+  ctx.fillStyle = shadow;
+  ctx.fill();
+
+  for (let layer = 0; layer < 18; layer += 1) {
+    ctx.beginPath();
+    ctx.arc(center, center + 20 + layer * 1.1, radius + 25, 0, Math.PI * 2);
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = `rgba(102, 57, 12, ${0.12 - layer * 0.004})`;
+    ctx.stroke();
+  }
 
   items.forEach((item, index) => {
     const start = index * slice - Math.PI / 2;
     const end = start + slice;
     const mid = start + slice / 2;
+    const base = colors[index % colors.length];
+    const gradient = ctx.createRadialGradient(center - 80, center - 100, radius * 0.1, center, center, radius);
+    gradient.addColorStop(0, "#fff1a8");
+    gradient.addColorStop(0.18, base);
+    gradient.addColorStop(1, base);
     ctx.beginPath();
     ctx.moveTo(center, center);
     ctx.arc(center, center, radius, start, end);
     ctx.closePath();
-    ctx.fillStyle = colors[index % colors.length];
+    ctx.fillStyle = gradient;
     ctx.fill();
     ctx.lineWidth = 2;
-    ctx.strokeStyle = "rgba(255,255,255,0.22)";
+    ctx.strokeStyle = "rgba(255,255,255,0.52)";
     ctx.stroke();
 
     const labelRadius = radius * 0.58;
     const x = center + Math.cos(mid) * labelRadius;
     const y = center + Math.sin(mid) * labelRadius;
-    const text = item.length > 16 ? `${item.slice(0, 15)}…` : item;
+    const text = item.length > 12 ? `${item.slice(0, 11)}…` : item;
     const upright = mid > Math.PI / 2 && mid < (Math.PI * 3) / 2;
     ctx.save();
     ctx.translate(x, y);
     ctx.rotate(upright ? mid + Math.PI : mid);
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
     ctx.fillStyle = "#ffffff";
-    ctx.font = "900 22px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
+    ctx.font = "900 24px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.shadowColor = "rgba(0,0,0,0.55)";
@@ -129,10 +165,58 @@ function buildWheel(items) {
     ctx.restore();
   });
 
+  const gloss = ctx.createLinearGradient(center - radius, center - radius, center + radius, center + radius);
+  gloss.addColorStop(0, "rgba(255,255,255,0.38)");
+  gloss.addColorStop(0.34, "rgba(255,255,255,0.04)");
+  gloss.addColorStop(0.7, "rgba(0,0,0,0.12)");
+  gloss.addColorStop(1, "rgba(255,255,255,0.16)");
   ctx.beginPath();
   ctx.arc(center, center, radius, 0, Math.PI * 2);
-  ctx.lineWidth = 14;
-  ctx.strokeStyle = "#fff7df";
+  ctx.fillStyle = gloss;
+  ctx.fill();
+
+  const rim = ctx.createLinearGradient(center - radius, center - radius, center + radius, center + radius);
+  rim.addColorStop(0, "#fff6bf");
+  rim.addColorStop(0.22, "#d78620");
+  rim.addColorStop(0.5, "#ffd55f");
+  rim.addColorStop(0.76, "#a85f12");
+  rim.addColorStop(1, "#fff1ad");
+  ctx.beginPath();
+  ctx.arc(center, center, radius + 29, 0, Math.PI * 2);
+  ctx.lineWidth = 34;
+  ctx.strokeStyle = rim;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(center, center, radius + 47, 0, Math.PI * 2);
+  ctx.lineWidth = 7;
+  ctx.strokeStyle = "#7a4411";
+  ctx.stroke();
+
+  for (let i = 0; i < items.length * 2; i += 1) {
+    const angle = (Math.PI * 2 * i) / (items.length * 2) - Math.PI / 2;
+    const x = center + Math.cos(angle) * (radius + 46);
+    const y = center + Math.sin(angle) * (radius + 46);
+    const bolt = ctx.createRadialGradient(x - 2, y - 2, 1, x, y, 7);
+    bolt.addColorStop(0, "#fff8d2");
+    bolt.addColorStop(0.45, "#aeb4c2");
+    bolt.addColorStop(1, "#4d5564");
+    ctx.beginPath();
+    ctx.arc(x, y, 6.2, 0, Math.PI * 2);
+    ctx.fillStyle = bolt;
+    ctx.fill();
+  }
+
+  const hub = ctx.createRadialGradient(center - 18, center - 24, 6, center, center, 54);
+  hub.addColorStop(0, "#fff8c7");
+  hub.addColorStop(0.28, "#ffd04b");
+  hub.addColorStop(0.72, "#e59116");
+  hub.addColorStop(1, "#8c4e0c");
+  ctx.beginPath();
+  ctx.arc(center, center, 45, 0, Math.PI * 2);
+  ctx.fillStyle = hub;
+  ctx.fill();
+  ctx.lineWidth = 6;
+  ctx.strokeStyle = "#fff0a2";
   ctx.stroke();
 }
 
@@ -141,15 +225,112 @@ function spinWheel() {
   if (!items.length) return;
   buildWheel(items);
   const index = Math.floor(Math.random() * items.length);
+  if (typeof window.playPicksSpinWheel3D === "function") {
+    window.playPicksSpinWheel3D(index, items);
+    setTimeout(() => setResult(items[index]), 4100);
+    return;
+  }
   const slice = 360 / items.length;
   rotation += 1440 + (360 - index * slice - slice / 2);
   document.querySelector("[data-wheel]").style.transform = `rotate(${rotation}deg)`;
   setTimeout(() => setResult(items[index]), 4100);
 }
 
+function syncWheelInputFromOptions() {
+  const input = document.querySelector("[data-items]");
+  const rows = [...document.querySelectorAll("[data-wheel-option-input]")];
+  if (!input || !rows.length) return;
+  input.value = rows.map((row) => row.value.trim()).filter(Boolean).join("\n");
+  const items = parseItems();
+  document.querySelector("[data-option-count]") && (document.querySelector("[data-option-count]").textContent = String(items.length));
+  document.querySelector("[data-options-used]") && (document.querySelector("[data-options-used]").textContent = String(items.length));
+  buildWheel(items.length ? items : tools["spin-the-wheel"].defaults);
+  const result = document.querySelector("[data-result]");
+  if (result && result.textContent !== "Ready to spin") result.textContent = "Ready to spin";
+}
+
+function renderWheelOptions() {
+  const list = document.querySelector("[data-wheel-options]");
+  const input = document.querySelector("[data-items]");
+  if (!list || !input) return;
+  const items = parseItems().filter(Boolean);
+  list.innerHTML = items
+    .map(
+      (item, index) => `
+        <label class="wheel-option-row">
+          <span class="wheel-drag">⋮⋮</span>
+          <input data-wheel-option-input value="${item.replace(/"/g, "&quot;")}" aria-label="Wheel option ${index + 1}" />
+          <i style="--dot:${colors[index % colors.length]}"></i>
+          <button type="button" data-remove-wheel-option="${index}" aria-label="Remove ${item}">×</button>
+        </label>`,
+    )
+    .join("");
+  document.querySelectorAll("[data-wheel-option-input]").forEach((field) => {
+    field.addEventListener("input", syncWheelInputFromOptions);
+  });
+  document.querySelectorAll("[data-remove-wheel-option]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.removeWheelOption);
+      const next = parseItems().filter((_, itemIndex) => itemIndex !== index);
+      input.value = next.join("\n");
+      renderWheelOptions();
+      syncWheelInputFromOptions();
+    });
+  });
+  syncWheelInputFromOptions();
+}
+
+function renderWheelHistory() {
+  const list = document.querySelector("[data-history-list]");
+  if (!list) return;
+  if (!history.length) {
+    list.innerHTML = "<p>No spins yet</p>";
+    return;
+  }
+  list.innerHTML = history
+    .map(
+      (item, index) => `
+        <div>
+          <i style="--dot:${colors[index % colors.length]}"></i>
+          <strong>${item}</strong>
+          <span>${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+        </div>`,
+    )
+    .join("");
+  const total = document.querySelector("[data-total-spins]");
+  if (total) total.textContent = String(history.length);
+}
+
 function pickRandom() {
   const items = parseItems();
   if (items.length) setResult(randomItem(items));
+}
+
+function applyDecisionTemplate(name) {
+  const template = decisionTemplates[name];
+  const input = document.querySelector("[data-items]");
+  if (!template || !input) return;
+  document.querySelectorAll("[data-template]").forEach((button) => {
+    const active = button.dataset.template === name;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  });
+  input.value = template.join("\n");
+  setResult(`Template: ${name.replace(/yesno/i, "yes or no")}`);
+}
+
+function clearDecisionMaker() {
+  const input = document.querySelector("[data-items]");
+  if (input) input.value = "";
+  history = [];
+  const result = document.querySelector("[data-result]");
+  if (result) result.textContent = "Waiting for options";
+  const historyNode = document.querySelector("[data-history]");
+  if (historyNode) historyNode.textContent = "No decisions yet";
+  document.querySelectorAll("[data-template]").forEach((button) => {
+    button.classList.remove("is-active");
+    button.setAttribute("aria-pressed", "false");
+  });
 }
 
 function renderBoxes(kind) {
@@ -290,6 +471,7 @@ function initTool() {
   const itemInput = document.querySelector("[data-items]");
   if (itemInput) itemInput.value = config.defaults.join("\n");
   buildWheel(config.defaults);
+  if (key === "spin-the-wheel") renderWheelOptions();
   if (config.type === "boxes" || config.type === "cards") renderBoxes(config.type);
   if (config.type === "dice") rollDice();
   if (config.type === "would") renderWould();
@@ -307,7 +489,24 @@ function initTool() {
       if (action === "memory") renderMemory();
       if (action === "copy") copyResult();
       if (action === "share") shareResult();
+      if (action === "clear") clearDecisionMaker();
     });
+  });
+  document.querySelectorAll("[data-template]").forEach((button) => {
+    button.addEventListener("click", () => applyDecisionTemplate(button.dataset.template));
+  });
+  document.querySelector("[data-add-option]")?.addEventListener("click", () => {
+    const input = document.querySelector("[data-items]");
+    if (!input) return;
+    const next = [...parseItems(), `Option ${parseItems().length + 1}`];
+    input.value = next.join("\n");
+    renderWheelOptions();
+  });
+  document.querySelector("[data-wheel-clear]")?.addEventListener("click", () => {
+    history = [];
+    renderWheelHistory();
+    const result = document.querySelector("[data-result]");
+    if (result) result.textContent = "Ready to spin";
   });
 }
 
