@@ -23,7 +23,14 @@ Play Picks is a static mini-game and random-tools website designed for `plays.ji
 - Replace AdSense placeholders after approval.
 - Update `sitemap.xml` domain if the final host is not `https://plays.jiandengcun.com`.
 - Keep all prize, box, wheel, and card tools marked as entertainment-only unless a compliant real giveaway system is built separately.
+- Deployment steps are documented in `DEPLOYMENT.md`.
 
 ## Local Preview
 
 Open `index.html` directly or run a static server from this folder.
+
+Recommended local preview command:
+
+```bash
+python3 -m http.server 8093
+```

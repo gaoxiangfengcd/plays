@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /games/carpet-cleaning/unity-source/
+Disallow: /tools/_
+Disallow: /carpet-cleaning/
 
 Sitemap: https://plays.jiandengcun.com/sitemap.xml
